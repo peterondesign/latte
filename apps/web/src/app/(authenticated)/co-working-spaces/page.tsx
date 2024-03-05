@@ -1,4 +1,4 @@
-/* 'use client'
+'use client'
 
 import React, { useState } from 'react';
 import { Button, Checkbox, Col, Drawer, InputNumber, Modal, Row, Select, Slider, Spin, Typography } from 'antd';
@@ -16,7 +16,6 @@ export default function DiscoverSpacesPage() {
   const router = useRouter();
   const authentication = useAuthentication();
   const userId = authentication.user?.id;
-  const { enqueueSnackbar } = useSnackbar();
   const [coWorkingSpaces, setCoWorkingSpaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCity, setSelectedCity] = useState(undefined);
@@ -34,7 +33,6 @@ export default function DiscoverSpacesPage() {
       setCoWorkingSpaces(spaces);
       setLoading(false);
     } catch (error) {
-      enqueueSnackbar('Failed to fetch co-working spaces.', { variant: 'error' });
       console.error('Failed to fetch co-working spaces.', error);
       setLoading(false);
     }
@@ -55,7 +53,6 @@ export default function DiscoverSpacesPage() {
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
       <Title level={2}>Discover Co-Working Spaces</Title>
       <Text>Explore various co-working spaces to find the perfect spot for your work needs.</Text>
-      
       <Button icon={<FilterOutlined />} style={{ margin: '20px 0' }} onClick={() => setFilterDrawerVisible(true)}>Filter</Button>
       {loading ? (
         <Spin size="large" />
@@ -139,82 +136,5 @@ export default function DiscoverSpacesPage() {
         <Button type="primary" onClick={applyFilters} style={{ marginTop: '20px' }}>Apply Filters</Button>
       </Drawer>
     </div>
-  );
-}*/
-
-'use client'
-
-import React, { useEffect, useState } from 'react';
-import { Col, Row, Card, Typography, Spin, Space } from 'antd';
-import { EnvironmentOutlined, UserOutlined, SoundOutlined, TeamOutlined } from '@ant-design/icons';
-const { Title, Text } = Typography;
-import { useAuthentication } from '@web/modules/authentication'
-import dayjs from 'dayjs'
-import { useSnackbar } from 'notistack'
-import { useRouter, useParams } from 'next/navigation'
-import { Api, Model } from '@web/domain'
-import { PageLayout } from '@web/layouts/Page.layout'
-
-export default function DiscoverSpacesPage() {
-  const router = useRouter();
-  const authentication = useAuthentication();
-  const userId = authentication.user?.id;
-  const { enqueueSnackbar } = useSnackbar();
-  const [coWorkingSpaces, setCoWorkingSpaces] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchCoWorkingSpaces = async () => {
-      try {
-        const spaces = await Api.CoWorkingSpace.findMany({ includes: ['admin', 'images', 'reviews', 'checkIns'] });
-        setCoWorkingSpaces(spaces);
-        setLoading(false);
-      } catch (error) {
-        enqueueSnackbar('Failed to fetch co-working spaces.', { variant: 'error' });
-        setLoading(false);
-      }
-    };
-
-    fetchCoWorkingSpaces();
-  }, []);
-
-  const navigateToSpaceDetails = (id) => {
-    router.push(`/co-working-space/${id}`);
-  };
-
-  return (
-    <PageLayout layout="full-width">
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-        <Title level={2}>Discover Co-Working Spaces</Title>
-        <Text>Explore various co-working spaces to find the perfect spot for your work needs.</Text>
-        {loading ? (
-          <Spin size="large" />
-        ) : (
-          <Row gutter={[16, 16]} style={{ marginTop: '20px' }}>
-            {coWorkingSpaces?.map((space) => (
-              <Col xs={24} sm={12} md={8} lg={6} key={space.id}>
-                <Card
-                  hoverable
-                  cover={<img alt={space.title} src={space.images?.[0]?.url || ''} style={{ height: '200px', objectFit: 'cover' }} />}
-                  onClick={() => navigateToSpaceDetails(space.id)}
-                >
-                  <Card.Meta
-                    title={space.title}
-                    description={
-                      <Space direction="vertical">
-                        <Text><EnvironmentOutlined /> {space.address}</Text>
-                        <Text><UserOutlined /> Admin: {space.admin?.name}</Text>
-                        <Text><SoundOutlined /> Noise Level: {space.noiseLevel}</Text>
-                        <Text><TeamOutlined /> Occupancy: {space.occupancy}</Text>
-                      </Space>
-                    }
-                  />
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        )}
-      </div>
-    </PageLayout>
   );
 }
