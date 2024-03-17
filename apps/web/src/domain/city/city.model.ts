@@ -1,4 +1,4 @@
-import { CoworkingSpace } from '../coWorkingSpace'
+import { CoworkingSpace } from '../coworkingSpace'
 
 export class City {
   id: string
