@@ -57,9 +57,9 @@ export default function CitySelectionPage() {
           placeholder="Select a city"
           optionFilterProp="children"
           onChange={handleCityChange}
-          filterOption={(input, option) =>
-            option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
+          // filterOption={(input, option) => 
+          //   option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          // }
         >
           {cities?.map(city => (
             <Option key={city.id} value={city.id}>
