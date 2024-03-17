@@ -1,34 +1,24 @@
 #!/bin/bash
 
-# If PORT is not defined
-if [ -z "$PORT" ]; then
-
-  # Check if .env file exists
-  if [ -f .env ]; then
-
-    # Read PORT value from .env (MacOS)
-    PORT=$(grep -E '^PORT=' .env | cut -d '=' -f 2-)
-
-    # Check if POST is still null
-    if [ -z "$PORT" ]; then
-
-      # Read PORT value from .env (Windows)
-      while IFS='=' read -r key value; do
-        key_clean="${key//[^a-zA-Z0-9]/}"
-
-        if [ $key_clean = "PORT" ]; then
-          PORT=$value
-          break
-        fi
-      done < .env
-    fi
-  fi
-
-  # Check if POST is still null
-  if [ -z "$PORT" ]; then
-    # Default value if not set in .env or system environment
-    PORT="8099"  
-  fi
+if [ -f .env ]; then
+  source .env
 fi
 
-next dev --port $PORT
+PORT_DEFAULT="8099"
+COLOR_GREEN="\033[0;32m"
+COLOR_RESET="\033[0m"
+
+# Check if WEB_PORT is defined
+if [ ! -z "$WEB_PORT" ]; then
+  # Start Next.js on WEB_PORT
+  echo "$COLOR_GREEN\nWeb starting on port $WEB_PORT\n$COLOR_RESET"
+
+  next dev --port $WEB_PORT
+
+else
+  echo "$COLOR_GREEN\nWeb starting on port $PORT_DEFAULT$COLOR_RESET"
+  echo "${COLOR_GREEN}You can change the starting port using the \$WEB_PORT environment variable.\n$COLOR_RESET"
+
+  next dev --port $PORT_DEFAULT
+
+fi

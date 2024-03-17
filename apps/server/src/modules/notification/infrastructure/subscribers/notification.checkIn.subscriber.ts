@@ -16,13 +16,8 @@ export class NotificationCheckInSubscriber {
     private socketService: SocketService,
   ) {}
 
-  @OnEvent(
-    CheckInApplicationEvent
-      .CheckInCreated.key,
-  )
-  async handleCreation(
-    data: CheckInApplicationEvent.CheckInCreated.Payload,
-  ) {
+  @OnEvent(CheckInApplicationEvent.CheckInCreated.key)
+  async handleCreation(data: CheckInApplicationEvent.CheckInCreated.Payload) {
     const values: Partial<Notification> = {
       title: 'Admin',
       message: 'A new checkIn has been created',

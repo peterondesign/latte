@@ -1,2 +1,2 @@
-export * from './coWorkingSpace.application.event'
-export * from './coWorkingSpace.application.module'
+export * from './coworkingSpace.application.event'
+export * from './coworkingSpace.application.module'

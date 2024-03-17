@@ -11,5 +11,4 @@ export class Notification {
   userId: string
   user?: User
   dateCreated: string
-
 }

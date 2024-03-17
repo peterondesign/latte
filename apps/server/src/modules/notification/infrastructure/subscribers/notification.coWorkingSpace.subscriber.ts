@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { OnEvent } from '@nestjs/event-emitter'
 import { SocketService } from '@server/libraries/socket'
-import { CoWorkingSpaceApplicationEvent } from '@server/modules/coWorkingSpace/application'
+import { CoworkingSpaceApplicationEvent } from '@server/modules/coworkingSpace/application'
 import { AuthorizationDomainFacade } from '@server/modules/authorization/domain'
 import {
   Notification,
@@ -9,23 +9,20 @@ import {
 } from '@server/modules/notification/domain'
 
 @Injectable()
-export class NotificationCoWorkingSpaceSubscriber {
+export class NotificationCoworkingSpaceSubscriber {
   constructor(
     private notificationDomainFacade: NotificationDomainFacade,
     private authorizationDomainFacade: AuthorizationDomainFacade,
     private socketService: SocketService,
   ) {}
 
-  @OnEvent(
-    CoWorkingSpaceApplicationEvent
-      .CoWorkingSpaceCreated.key,
-  )
+  @OnEvent(CoworkingSpaceApplicationEvent.CoworkingSpaceCreated.key)
   async handleCreation(
-    data: CoWorkingSpaceApplicationEvent.CoWorkingSpaceCreated.Payload,
+    data: CoworkingSpaceApplicationEvent.CoworkingSpaceCreated.Payload,
   ) {
     const values: Partial<Notification> = {
       title: 'Admin',
-      message: 'A new coWorkingSpace has been created',
+      message: 'A new coworkingSpace has been created',
       senderName: 'API',
     }
 

@@ -19,7 +19,7 @@ export const Logo: React.FC<Props> = ({
   return (
     <>
       <img
-        src="https://marblism-dashboard-api--production-public.s3.us-west-1.amazonaws.com/FMnDfZ-coworklive-ylx8"
+        src="https://marblism-dashboard-api--production-public.s3.us-west-1.amazonaws.com/d0sTXr-coworklivev3-TCBo"
         height={width}
         width={height}
         style={{

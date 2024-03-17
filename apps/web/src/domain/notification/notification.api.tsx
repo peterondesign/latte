@@ -55,7 +55,7 @@ export class NotificationApi {
     return HttpService.api.delete(`/v1/notifications/${notificationId}`)
   }
 
-static findManyByUserId(
+  static findManyByUserId(
     userId: string,
     queryOptions?: ApiHelper.QueryOptions<Notification>,
   ): Promise<Notification[]> {
@@ -75,5 +75,4 @@ static findManyByUserId(
       values,
     )
   }
-
 }

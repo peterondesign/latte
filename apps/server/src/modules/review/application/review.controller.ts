@@ -11,17 +11,11 @@ import {
   Req,
 } from '@nestjs/common'
 import { EventService } from '@server/libraries/event'
-import {
-  Review,
-  ReviewDomainFacade,
-} from '@server/modules/review/domain'
+import { Review, ReviewDomainFacade } from '@server/modules/review/domain'
 import { AuthenticationDomainFacade } from '@server/modules/authentication/domain'
 import { RequestHelper } from '../../../helpers/request'
 import { ReviewApplicationEvent } from './review.application.event'
-import {
-  ReviewCreateDto,
-  ReviewUpdateDto,
-} from './review.dto'
+import { ReviewCreateDto, ReviewUpdateDto } from './review.dto'
 
 @Controller('/v1/reviews')
 export class ReviewController {
@@ -41,17 +35,13 @@ export class ReviewController {
   }
 
   @Post('/')
-  async create(
-    @Body() body: ReviewCreateDto,
-    @Req() request: Request,
-  ) {
+  async create(@Body() body: ReviewCreateDto, @Req() request: Request) {
     const { user } = this.authenticationDomainFacade.getRequestPayload(request)
 
     const item = await this.reviewDomainFacade.create(body)
 
     await this.eventService.emit<ReviewApplicationEvent.ReviewCreated.Payload>(
-      ReviewApplicationEvent
-        .ReviewCreated.key,
+      ReviewApplicationEvent.ReviewCreated.key,
       {
         id: item.id,
         userId: user.id,
@@ -62,17 +52,13 @@ export class ReviewController {
   }
 
   @Get('/:reviewId')
-  async findOne(
-    @Param('reviewId') reviewId: string,
-    @Req() request: Request,
-  ) {
+  async findOne(@Param('reviewId') reviewId: string, @Req() request: Request) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
-    const item =
-      await this.reviewDomainFacade.findOneByIdOrFail(
-        reviewId,
-        queryOptions,
-      )
+    const item = await this.reviewDomainFacade.findOneByIdOrFail(
+      reviewId,
+      queryOptions,
+    )
 
     return item
   }
@@ -82,10 +68,7 @@ export class ReviewController {
     @Param('reviewId') reviewId: string,
     @Body() body: ReviewUpdateDto,
   ) {
-    const item =
-      await this.reviewDomainFacade.findOneByIdOrFail(
-        reviewId,
-      )
+    const item = await this.reviewDomainFacade.findOneByIdOrFail(reviewId)
 
     const itemUpdated = await this.reviewDomainFacade.update(
       item,
@@ -96,10 +79,7 @@ export class ReviewController {
 
   @Delete('/:reviewId')
   async delete(@Param('reviewId') reviewId: string) {
-    const item =
-      await this.reviewDomainFacade.findOneByIdOrFail(
-        reviewId,
-      )
+    const item = await this.reviewDomainFacade.findOneByIdOrFail(reviewId)
 
     await this.reviewDomainFacade.delete(item)
 

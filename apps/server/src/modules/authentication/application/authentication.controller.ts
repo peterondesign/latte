@@ -65,7 +65,7 @@ export class AuthenticationController {
       email,
       password,
 
-name,
+      name,
     } = body
 
     const userExisting = await this.userDomainFacade
@@ -82,7 +82,7 @@ name,
       email,
       name,
 
-password: passwordHashed,
+      password: passwordHashed,
     })
 
     const token = this.authenticationDomainFacade.buildToken(user.id)

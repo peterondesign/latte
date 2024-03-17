@@ -1,26 +1,20 @@
 import { Module } from '@nestjs/common'
 import { AuthenticationDomainModule } from '@server/modules/authentication/domain'
-import { CoWorkingSpaceDomainModule } from '../domain'
-import { CoWorkingSpaceController } from './coWorkingSpace.controller'
+import { CoworkingSpaceDomainModule } from '../domain'
+import { CoworkingSpaceController } from './coworkingSpace.controller'
 
-import { UserDomainModule } from '../../../modules/user/domain'
+import { CityDomainModule } from '../../../modules/city/domain'
 
-import { CoWorkingSpaceByUserController } from './coWorkingSpaceByUser.controller'
+import { CoworkingSpaceByCityController } from './coworkingSpaceByCity.controller'
 
 @Module({
   imports: [
     AuthenticationDomainModule,
-    CoWorkingSpaceDomainModule,
+    CoworkingSpaceDomainModule,
 
-UserDomainModule,
-
-],
-  controllers: [
-    CoWorkingSpaceController,
-    
-    CoWorkingSpaceByUserController,
-    
+    CityDomainModule,
   ],
+  controllers: [CoworkingSpaceController, CoworkingSpaceByCityController],
   providers: [],
 })
-export class CoWorkingSpaceApplicationModule {}
+export class CoworkingSpaceApplicationModule {}

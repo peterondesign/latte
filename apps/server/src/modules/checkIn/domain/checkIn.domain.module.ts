@@ -5,14 +5,8 @@ import { CheckInDomainFacade } from './checkIn.domain.facade'
 import { CheckIn } from './checkIn.model'
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([CheckIn]),
-    DatabaseHelperModule,
-  ],
-  providers: [
-    CheckInDomainFacade,
-    CheckInDomainFacade,
-  ],
+  imports: [TypeOrmModule.forFeature([CheckIn]), DatabaseHelperModule],
+  providers: [CheckInDomainFacade, CheckInDomainFacade],
   exports: [CheckInDomainFacade],
 })
 export class CheckInDomainModule {}

@@ -1,6 +1,6 @@
-export namespace CoWorkingSpaceApplicationEvent {
-  export namespace CoWorkingSpaceCreated {
-    export const key = 'coWorkingSpace.application.coWorkingSpace.created'
+export namespace CoworkingSpaceApplicationEvent {
+  export namespace CoworkingSpaceCreated {
+    export const key = 'coworkingSpace.application.coworkingSpace.created'
 
     export type Payload = {
       id: string

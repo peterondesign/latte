@@ -21,7 +21,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
               <CoreStoreProvider>
                 <AuthenticationProvider>
                   <SocketProvider>
-                    <MrbMain name="CoWorkLive">{children}</MrbMain>
+                    <MrbMain name="Cowork Live v3">{children}</MrbMain>
                   </SocketProvider>
                 </AuthenticationProvider>
               </CoreStoreProvider>

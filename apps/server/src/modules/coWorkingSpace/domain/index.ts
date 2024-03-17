@@ -1,3 +1,3 @@
-export * from './coWorkingSpace.domain.facade'
-export * from './coWorkingSpace.domain.module'
-export * from './coWorkingSpace.model'
+export * from './coworkingSpace.domain.facade'
+export * from './coworkingSpace.domain.module'
+export * from './coworkingSpace.model'

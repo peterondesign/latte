@@ -12,7 +12,6 @@ export class UserCreateDto {
   @IsOptional()
   @IsString()
   pictureUrl: string
-
 }
 
 export class UserUpdateDto {
@@ -27,5 +26,4 @@ export class UserUpdateDto {
   @IsOptional()
   @IsString()
   pictureUrl?: string
-
 }

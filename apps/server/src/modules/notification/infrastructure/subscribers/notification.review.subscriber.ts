@@ -16,13 +16,8 @@ export class NotificationReviewSubscriber {
     private socketService: SocketService,
   ) {}
 
-  @OnEvent(
-    ReviewApplicationEvent
-      .ReviewCreated.key,
-  )
-  async handleCreation(
-    data: ReviewApplicationEvent.ReviewCreated.Payload,
-  ) {
+  @OnEvent(ReviewApplicationEvent.ReviewCreated.key)
+  async handleCreation(data: ReviewApplicationEvent.ReviewCreated.Payload) {
     const values: Partial<Notification> = {
       title: 'Admin',
       message: 'A new review has been created',

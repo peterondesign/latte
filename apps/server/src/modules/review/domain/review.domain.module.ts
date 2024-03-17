@@ -5,14 +5,8 @@ import { ReviewDomainFacade } from './review.domain.facade'
 import { Review } from './review.model'
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Review]),
-    DatabaseHelperModule,
-  ],
-  providers: [
-    ReviewDomainFacade,
-    ReviewDomainFacade,
-  ],
+  imports: [TypeOrmModule.forFeature([Review]), DatabaseHelperModule],
+  providers: [ReviewDomainFacade, ReviewDomainFacade],
   exports: [ReviewDomainFacade],
 })
 export class ReviewDomainModule {}

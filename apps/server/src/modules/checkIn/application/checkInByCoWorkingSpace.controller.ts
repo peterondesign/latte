@@ -8,55 +8,50 @@ import { AuthenticationDomainFacade } from '@server/modules/authentication/domai
 import { CheckInApplicationEvent } from './checkIn.application.event'
 import { CheckInCreateDto } from './checkIn.dto'
 
-import { CoWorkingSpaceDomainFacade } from '../../coWorkingSpace/domain'
+import { CoworkingSpaceDomainFacade } from '../../coworkingSpace/domain'
 
-@Controller('/v1/coWorkingSpaces')
-export class CheckInByCoWorkingSpaceController {
+@Controller('/v1/coworkingSpaces')
+export class CheckInByCoworkingSpaceController {
   constructor(
-    
-    private coWorkingSpaceDomainFacade: CoWorkingSpaceDomainFacade,
-    
+    private coworkingSpaceDomainFacade: CoworkingSpaceDomainFacade,
+
     private checkInDomainFacade: CheckInDomainFacade,
     private eventService: EventService,
     private authenticationDomainFacade: AuthenticationDomainFacade,
   ) {}
 
-@Get('/coWorkingSpace/:coWorkingSpaceId/checkIns')
-  async findManyCoWorkingSpaceId(
-    @Param('coWorkingSpaceId') coWorkingSpaceId: string,
+  @Get('/coworkingSpace/:coworkingSpaceId/checkIns')
+  async findManyCoworkingSpaceId(
+    @Param('coworkingSpaceId') coworkingSpaceId: string,
     @Req() request: Request,
   ) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
     const parent =
-      await this.coWorkingSpaceDomainFacade.findOneByIdOrFail(
-        coWorkingSpaceId,
-      )
+      await this.coworkingSpaceDomainFacade.findOneByIdOrFail(coworkingSpaceId)
 
-    const items =
-      await this.checkInDomainFacade.findManyByCoWorkingSpace(
-        parent,
-        queryOptions,
-      )
+    const items = await this.checkInDomainFacade.findManyByCoworkingSpace(
+      parent,
+      queryOptions,
+    )
 
     return items
   }
 
-  @Post('/coWorkingSpace/:coWorkingSpaceId/checkIns')
-  async createByCoWorkingSpaceId(
-    @Param('coWorkingSpaceId') coWorkingSpaceId: string,
+  @Post('/coworkingSpace/:coworkingSpaceId/checkIns')
+  async createByCoworkingSpaceId(
+    @Param('coworkingSpaceId') coworkingSpaceId: string,
     @Body() body: CheckInCreateDto,
     @Req() request: Request,
   ) {
     const { user } = this.authenticationDomainFacade.getRequestPayload(request)
 
-    const valuesUpdated = { ...body, coWorkingSpaceId }
+    const valuesUpdated = { ...body, coworkingSpaceId }
 
     const item = await this.checkInDomainFacade.create(valuesUpdated)
 
     await this.eventService.emit<CheckInApplicationEvent.CheckInCreated.Payload>(
-      CheckInApplicationEvent
-        .CheckInCreated.key,
+      CheckInApplicationEvent.CheckInCreated.key,
       {
         id: item.id,
         userId: user.id,
@@ -65,5 +60,4 @@ export class CheckInByCoWorkingSpaceController {
 
     return item
   }
-  
 }

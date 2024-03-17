@@ -1,27 +1,25 @@
+import { User } from '../user'
 
-
-import { User } from "../user"
-
-import { CoWorkingSpace } from "../coWorkingSpace"
+import { CoworkingSpace } from '../coworkingSpace'
 
 export class Review {
+  id: string
 
-id: string
+  content?: string
 
-content: string
+  rating?: number
 
-userId: string
+  userId?: string
 
-user?: User
+  user?: User
 
-coWorkingSpaceId: string
+  coworkingSpaceId?: string
 
-coWorkingSpace?: CoWorkingSpace
+  coworkingSpace?: CoworkingSpace
 
-dateCreated: string
+  dateCreated: string
 
-dateDeleted: string
+  dateDeleted: string
 
-dateUpdated: string
-
+  dateUpdated: string
 }

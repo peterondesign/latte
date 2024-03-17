@@ -1,27 +1,21 @@
+import { User } from '../user'
 
-
-import { User } from "../user"
-
-import { CoWorkingSpace } from "../coWorkingSpace"
+import { CoworkingSpace } from '../coworkingSpace'
 
 export class CheckIn {
+  id: string
 
-id: string
+  userId?: string
 
-checkInTime: string
+  user?: User
 
-userId: string
+  coworkingSpaceId?: string
 
-user?: User
+  coworkingSpace?: CoworkingSpace
 
-coWorkingSpaceId: string
+  dateCreated: string
 
-coWorkingSpace?: CoWorkingSpace
+  dateDeleted: string
 
-dateCreated: string
-
-dateDeleted: string
-
-dateUpdated: string
-
+  dateUpdated: string
 }

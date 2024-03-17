@@ -13,44 +13,28 @@ import {
 
 import { User } from '../../../modules/user/domain'
 
-import { CoWorkingSpace } from '../../../modules/coWorkingSpace/domain'
+import { CoworkingSpace } from '../../../modules/coworkingSpace/domain'
 
 @Entity()
 export class CheckIn {
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-@PrimaryGeneratedColumn('uuid')
+  @Column({ nullable: true })
+  userId?: string
 
-id: string
-
-@Column({})
-
-checkInTime: string
-
-@Column({})
-
-userId: string
-
-@ManyToOne(
-  () => User,
-  parent => parent.checkIns,
-  )
+  @ManyToOne(() => User, parent => parent.checkIns)
   @JoinColumn({ name: 'userId' })
+  user?: User
 
-user?: User
+  @Column({ nullable: true })
+  coworkingSpaceId?: string
 
-@Column({})
+  @ManyToOne(() => CoworkingSpace, parent => parent.checkIns)
+  @JoinColumn({ name: 'coworkingSpaceId' })
+  coworkingSpace?: CoworkingSpace
 
-coWorkingSpaceId: string
-
-@ManyToOne(
-  () => CoWorkingSpace,
-  parent => parent.checkIns,
-  )
-  @JoinColumn({ name: 'coWorkingSpaceId' })
-
-coWorkingSpace?: CoWorkingSpace
-
-@CreateDateColumn()
+  @CreateDateColumn()
   dateCreated: string
 
   @UpdateDateColumn()

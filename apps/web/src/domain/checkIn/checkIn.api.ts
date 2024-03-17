@@ -17,14 +17,10 @@ export class CheckInApi {
   ): Promise<CheckIn> {
     const buildOptions = ApiHelper.buildQueryOptions(queryOptions)
 
-    return HttpService.api.get(
-      `/v1/checkIns/${checkInId}${buildOptions}`,
-    )
+    return HttpService.api.get(`/v1/checkIns/${checkInId}${buildOptions}`)
   }
 
-  static createOne(
-    values: Partial<CheckIn>,
-  ): Promise<CheckIn> {
+  static createOne(values: Partial<CheckIn>): Promise<CheckIn> {
     return HttpService.api.post(`/v1/checkIns`, values)
   }
 
@@ -32,17 +28,14 @@ export class CheckInApi {
     checkInId: string,
     values: Partial<CheckIn>,
   ): Promise<CheckIn> {
-    return HttpService.api.patch(
-      `/v1/checkIns/${checkInId}`,
-      values,
-    )
+    return HttpService.api.patch(`/v1/checkIns/${checkInId}`, values)
   }
 
   static deleteOne(checkInId: string): Promise<void> {
     return HttpService.api.delete(`/v1/checkIns/${checkInId}`)
   }
 
-static findManyByUserId(
+  static findManyByUserId(
     userId: string,
     queryOptions?: ApiHelper.QueryOptions<CheckIn>,
   ): Promise<CheckIn[]> {
@@ -57,31 +50,27 @@ static findManyByUserId(
     userId: string,
     values: Partial<CheckIn>,
   ): Promise<CheckIn> {
-    return HttpService.api.post(
-      `/v1/users/user/${userId}/checkIns`,
-      values,
-    )
+    return HttpService.api.post(`/v1/users/user/${userId}/checkIns`, values)
   }
 
-static findManyByCoWorkingSpaceId(
-    coWorkingSpaceId: string,
+  static findManyByCoworkingSpaceId(
+    coworkingSpaceId: string,
     queryOptions?: ApiHelper.QueryOptions<CheckIn>,
   ): Promise<CheckIn[]> {
     const buildOptions = ApiHelper.buildQueryOptions(queryOptions)
 
     return HttpService.api.get(
-      `/v1/coWorkingSpaces/coWorkingSpace/${coWorkingSpaceId}/checkIns${buildOptions}`,
+      `/v1/coworkingSpaces/coworkingSpace/${coworkingSpaceId}/checkIns${buildOptions}`,
     )
   }
 
-  static createOneByCoWorkingSpaceId(
-    coWorkingSpaceId: string,
+  static createOneByCoworkingSpaceId(
+    coworkingSpaceId: string,
     values: Partial<CheckIn>,
   ): Promise<CheckIn> {
     return HttpService.api.post(
-      `/v1/coWorkingSpaces/coWorkingSpace/${coWorkingSpaceId}/checkIns`,
+      `/v1/coworkingSpaces/coworkingSpace/${coworkingSpaceId}/checkIns`,
       values,
     )
   }
-
 }

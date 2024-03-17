@@ -7,69 +7,61 @@ import {
 } from 'class-validator'
 
 export class ReviewCreateDto {
+  @IsString()
+  @IsOptional()
+  content?: string
 
-@IsString()
+  @IsNumber()
+  @IsOptional()
+  rating?: number
 
-@IsNotEmpty()
-  content: string
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   userId?: string
 
-@IsString()
+  @IsString()
+  @IsOptional()
+  coworkingSpaceId?: string
 
-@IsOptional()
-  coWorkingSpaceId?: string
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateCreated?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateDeleted?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateUpdated?: string
-
 }
 
 export class ReviewUpdateDto {
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   content?: string
 
-@IsString()
+  @IsNumber()
+  @IsOptional()
+  rating?: number
 
-@IsOptional()
+  @IsString()
+  @IsOptional()
   userId?: string
 
-@IsString()
+  @IsString()
+  @IsOptional()
+  coworkingSpaceId?: string
 
-@IsOptional()
-  coWorkingSpaceId?: string
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateCreated?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateDeleted?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateUpdated?: string
-
 }

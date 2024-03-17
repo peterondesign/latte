@@ -7,7 +7,7 @@ import { CheckIn } from './checkIn.model'
 
 import { User } from '../../user/domain'
 
-import { CoWorkingSpace } from '../../coWorkingSpace/domain'
+import { CoworkingSpace } from '../../coworkingSpace/domain'
 
 @Injectable()
 export class CheckInDomainFacade {
@@ -17,16 +17,11 @@ export class CheckInDomainFacade {
     private databaseHelper: DatabaseHelper,
   ) {}
 
-  async create(
-    values: Partial<CheckIn>,
-  ): Promise<CheckIn> {
+  async create(values: Partial<CheckIn>): Promise<CheckIn> {
     return this.repository.save(values)
   }
 
-  async update(
-    item: CheckIn,
-    values: Partial<CheckIn>,
-  ): Promise<CheckIn> {
+  async update(item: CheckIn, values: Partial<CheckIn>): Promise<CheckIn> {
     const itemUpdated = { ...item, ...values }
 
     return this.repository.save(itemUpdated)
@@ -76,7 +71,7 @@ export class CheckInDomainFacade {
     return item
   }
 
-async findManyByUser(
+  async findManyByUser(
     item: User,
     queryOptions: RequestHelper.QueryOptions<CheckIn> = {},
   ): Promise<CheckIn[]> {
@@ -101,12 +96,12 @@ async findManyByUser(
     return query.getMany()
   }
 
-async findManyByCoWorkingSpace(
-    item: CoWorkingSpace,
+  async findManyByCoworkingSpace(
+    item: CoworkingSpace,
     queryOptions: RequestHelper.QueryOptions<CheckIn> = {},
   ): Promise<CheckIn[]> {
     if (!item) {
-      this.databaseHelper.invalidQueryWhere('coWorkingSpace')
+      this.databaseHelper.invalidQueryWhere('coworkingSpace')
     }
 
     const queryOptionsEnsured = {
@@ -114,7 +109,7 @@ async findManyByCoWorkingSpace(
       orders: queryOptions.orders,
       filters: {
         ...queryOptions.filters,
-        coWorkingSpaceId: item.id,
+        coworkingSpaceId: item.id,
       },
     }
 
@@ -125,5 +120,4 @@ async findManyByCoWorkingSpace(
 
     return query.getMany()
   }
-
 }

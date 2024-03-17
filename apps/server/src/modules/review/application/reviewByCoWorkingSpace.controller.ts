@@ -8,55 +8,50 @@ import { AuthenticationDomainFacade } from '@server/modules/authentication/domai
 import { ReviewApplicationEvent } from './review.application.event'
 import { ReviewCreateDto } from './review.dto'
 
-import { CoWorkingSpaceDomainFacade } from '../../coWorkingSpace/domain'
+import { CoworkingSpaceDomainFacade } from '../../coworkingSpace/domain'
 
-@Controller('/v1/coWorkingSpaces')
-export class ReviewByCoWorkingSpaceController {
+@Controller('/v1/coworkingSpaces')
+export class ReviewByCoworkingSpaceController {
   constructor(
-    
-    private coWorkingSpaceDomainFacade: CoWorkingSpaceDomainFacade,
-    
+    private coworkingSpaceDomainFacade: CoworkingSpaceDomainFacade,
+
     private reviewDomainFacade: ReviewDomainFacade,
     private eventService: EventService,
     private authenticationDomainFacade: AuthenticationDomainFacade,
   ) {}
 
-@Get('/coWorkingSpace/:coWorkingSpaceId/reviews')
-  async findManyCoWorkingSpaceId(
-    @Param('coWorkingSpaceId') coWorkingSpaceId: string,
+  @Get('/coworkingSpace/:coworkingSpaceId/reviews')
+  async findManyCoworkingSpaceId(
+    @Param('coworkingSpaceId') coworkingSpaceId: string,
     @Req() request: Request,
   ) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
     const parent =
-      await this.coWorkingSpaceDomainFacade.findOneByIdOrFail(
-        coWorkingSpaceId,
-      )
+      await this.coworkingSpaceDomainFacade.findOneByIdOrFail(coworkingSpaceId)
 
-    const items =
-      await this.reviewDomainFacade.findManyByCoWorkingSpace(
-        parent,
-        queryOptions,
-      )
+    const items = await this.reviewDomainFacade.findManyByCoworkingSpace(
+      parent,
+      queryOptions,
+    )
 
     return items
   }
 
-  @Post('/coWorkingSpace/:coWorkingSpaceId/reviews')
-  async createByCoWorkingSpaceId(
-    @Param('coWorkingSpaceId') coWorkingSpaceId: string,
+  @Post('/coworkingSpace/:coworkingSpaceId/reviews')
+  async createByCoworkingSpaceId(
+    @Param('coworkingSpaceId') coworkingSpaceId: string,
     @Body() body: ReviewCreateDto,
     @Req() request: Request,
   ) {
     const { user } = this.authenticationDomainFacade.getRequestPayload(request)
 
-    const valuesUpdated = { ...body, coWorkingSpaceId }
+    const valuesUpdated = { ...body, coworkingSpaceId }
 
     const item = await this.reviewDomainFacade.create(valuesUpdated)
 
     await this.eventService.emit<ReviewApplicationEvent.ReviewCreated.Payload>(
-      ReviewApplicationEvent
-        .ReviewCreated.key,
+      ReviewApplicationEvent.ReviewCreated.key,
       {
         id: item.id,
         userId: user.id,
@@ -65,5 +60,4 @@ export class ReviewByCoWorkingSpaceController {
 
     return item
   }
-  
 }

@@ -7,27 +7,25 @@ import { UserDomainModule } from '../../../modules/user/domain'
 
 import { ReviewByUserController } from './reviewByUser.controller'
 
-import { CoWorkingSpaceDomainModule } from '../../../modules/coWorkingSpace/domain'
+import { CoworkingSpaceDomainModule } from '../../../modules/coworkingSpace/domain'
 
-import { ReviewByCoWorkingSpaceController } from './reviewByCoWorkingSpace.controller'
+import { ReviewByCoworkingSpaceController } from './reviewByCoworkingSpace.controller'
 
 @Module({
   imports: [
     AuthenticationDomainModule,
     ReviewDomainModule,
 
-UserDomainModule,
+    UserDomainModule,
 
-CoWorkingSpaceDomainModule,
-
-],
+    CoworkingSpaceDomainModule,
+  ],
   controllers: [
     ReviewController,
-    
+
     ReviewByUserController,
-    
-    ReviewByCoWorkingSpaceController,
-    
+
+    ReviewByCoworkingSpaceController,
   ],
   providers: [],
 })

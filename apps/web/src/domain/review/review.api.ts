@@ -17,32 +17,22 @@ export class ReviewApi {
   ): Promise<Review> {
     const buildOptions = ApiHelper.buildQueryOptions(queryOptions)
 
-    return HttpService.api.get(
-      `/v1/reviews/${reviewId}${buildOptions}`,
-    )
+    return HttpService.api.get(`/v1/reviews/${reviewId}${buildOptions}`)
   }
 
-  static createOne(
-    values: Partial<Review>,
-  ): Promise<Review> {
+  static createOne(values: Partial<Review>): Promise<Review> {
     return HttpService.api.post(`/v1/reviews`, values)
   }
 
-  static updateOne(
-    reviewId: string,
-    values: Partial<Review>,
-  ): Promise<Review> {
-    return HttpService.api.patch(
-      `/v1/reviews/${reviewId}`,
-      values,
-    )
+  static updateOne(reviewId: string, values: Partial<Review>): Promise<Review> {
+    return HttpService.api.patch(`/v1/reviews/${reviewId}`, values)
   }
 
   static deleteOne(reviewId: string): Promise<void> {
     return HttpService.api.delete(`/v1/reviews/${reviewId}`)
   }
 
-static findManyByUserId(
+  static findManyByUserId(
     userId: string,
     queryOptions?: ApiHelper.QueryOptions<Review>,
   ): Promise<Review[]> {
@@ -57,31 +47,27 @@ static findManyByUserId(
     userId: string,
     values: Partial<Review>,
   ): Promise<Review> {
-    return HttpService.api.post(
-      `/v1/users/user/${userId}/reviews`,
-      values,
-    )
+    return HttpService.api.post(`/v1/users/user/${userId}/reviews`, values)
   }
 
-static findManyByCoWorkingSpaceId(
-    coWorkingSpaceId: string,
+  static findManyByCoworkingSpaceId(
+    coworkingSpaceId: string,
     queryOptions?: ApiHelper.QueryOptions<Review>,
   ): Promise<Review[]> {
     const buildOptions = ApiHelper.buildQueryOptions(queryOptions)
 
     return HttpService.api.get(
-      `/v1/coWorkingSpaces/coWorkingSpace/${coWorkingSpaceId}/reviews${buildOptions}`,
+      `/v1/coworkingSpaces/coworkingSpace/${coworkingSpaceId}/reviews${buildOptions}`,
     )
   }
 
-  static createOneByCoWorkingSpaceId(
-    coWorkingSpaceId: string,
+  static createOneByCoworkingSpaceId(
+    coworkingSpaceId: string,
     values: Partial<Review>,
   ): Promise<Review> {
     return HttpService.api.post(
-      `/v1/coWorkingSpaces/coWorkingSpace/${coWorkingSpaceId}/reviews`,
+      `/v1/coworkingSpaces/coworkingSpace/${coworkingSpaceId}/reviews`,
       values,
     )
   }
-
 }

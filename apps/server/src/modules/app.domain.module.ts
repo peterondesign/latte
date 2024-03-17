@@ -6,15 +6,23 @@ import { UserDomainModule } from './user/domain'
 
 import { NotificationDomainModule } from './notification/domain'
 
-import { CoWorkingSpaceDomainModule } from './coWorkingSpace/domain'
+import { CityDomainModule } from './city/domain'
 
-import { ImageDomainModule } from './image/domain'
+import { CoworkingSpaceDomainModule } from './coworkingSpace/domain'
 
 import { ReviewDomainModule } from './review/domain'
 
+import { NomadMatchDomainModule } from './nomadMatch/domain'
+
+import { MessageDomainModule } from './message/domain'
+
+import { SubscriptionDomainModule } from './subscription/domain'
+
 import { CheckInDomainModule } from './checkIn/domain'
 
-import { CommentDomainModule } from './comment/domain'
+import { RewardDomainModule } from './reward/domain'
+
+import { PreferenceDomainModule } from './preference/domain'
 
 @Module({
   imports: [
@@ -23,17 +31,24 @@ import { CommentDomainModule } from './comment/domain'
     UserDomainModule,
     NotificationDomainModule,
 
-CoWorkingSpaceDomainModule,
+    CityDomainModule,
 
-ImageDomainModule,
+    CoworkingSpaceDomainModule,
 
-ReviewDomainModule,
+    ReviewDomainModule,
 
-CheckInDomainModule,
+    NomadMatchDomainModule,
 
-CommentDomainModule,
+    MessageDomainModule,
 
-],
+    SubscriptionDomainModule,
+
+    CheckInDomainModule,
+
+    RewardDomainModule,
+
+    PreferenceDomainModule,
+  ],
   controllers: [],
   providers: [],
 })

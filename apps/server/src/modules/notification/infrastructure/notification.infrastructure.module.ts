@@ -3,31 +3,45 @@ import { SocketModule } from '@server/libraries/socket'
 import { AuthorizationDomainModule } from '@server/modules/authorization/domain'
 import { NotificationDomainModule } from '../domain'
 
-import { NotificationCoWorkingSpaceSubscriber } from './subscribers/notification.coWorkingSpace.subscriber'
+import { NotificationCitySubscriber } from './subscribers/notification.city.subscriber'
 
-import { NotificationImageSubscriber } from './subscribers/notification.image.subscriber'
+import { NotificationCoworkingSpaceSubscriber } from './subscribers/notification.coworkingSpace.subscriber'
 
 import { NotificationReviewSubscriber } from './subscribers/notification.review.subscriber'
 
+import { NotificationNomadMatchSubscriber } from './subscribers/notification.nomadMatch.subscriber'
+
+import { NotificationMessageSubscriber } from './subscribers/notification.message.subscriber'
+
+import { NotificationSubscriptionSubscriber } from './subscribers/notification.subscription.subscriber'
+
 import { NotificationCheckInSubscriber } from './subscribers/notification.checkIn.subscriber'
 
-import { NotificationCommentSubscriber } from './subscribers/notification.comment.subscriber'
+import { NotificationRewardSubscriber } from './subscribers/notification.reward.subscriber'
+
+import { NotificationPreferenceSubscriber } from './subscribers/notification.preference.subscriber'
 
 @Module({
   imports: [AuthorizationDomainModule, NotificationDomainModule, SocketModule],
   providers: [
+    NotificationCitySubscriber,
 
-NotificationCoWorkingSpaceSubscriber,
+    NotificationCoworkingSpaceSubscriber,
 
-NotificationImageSubscriber,
+    NotificationReviewSubscriber,
 
-NotificationReviewSubscriber,
+    NotificationNomadMatchSubscriber,
 
-NotificationCheckInSubscriber,
+    NotificationMessageSubscriber,
 
-NotificationCommentSubscriber,
+    NotificationSubscriptionSubscriber,
 
-],
+    NotificationCheckInSubscriber,
+
+    NotificationRewardSubscriber,
+
+    NotificationPreferenceSubscriber,
+  ],
   exports: [],
 })
 export class NotificationInfrastructureModule {}

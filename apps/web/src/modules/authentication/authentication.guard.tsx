@@ -118,7 +118,7 @@ function AuthenticationGuard({ children, isPublic }: Props): ReactNode {
   return (
     <>
       {isLoading || !isRedirected ? (
-        <MrbSplashScreen name="CoWorkLive" />
+        <MrbSplashScreen name="Cowork Live v3" />
       ) : (
         children
       )}

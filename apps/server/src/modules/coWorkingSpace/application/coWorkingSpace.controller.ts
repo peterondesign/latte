@@ -12,22 +12,22 @@ import {
 } from '@nestjs/common'
 import { EventService } from '@server/libraries/event'
 import {
-  CoWorkingSpace,
-  CoWorkingSpaceDomainFacade,
-} from '@server/modules/coWorkingSpace/domain'
+  CoworkingSpace,
+  CoworkingSpaceDomainFacade,
+} from '@server/modules/coworkingSpace/domain'
 import { AuthenticationDomainFacade } from '@server/modules/authentication/domain'
 import { RequestHelper } from '../../../helpers/request'
-import { CoWorkingSpaceApplicationEvent } from './coWorkingSpace.application.event'
+import { CoworkingSpaceApplicationEvent } from './coworkingSpace.application.event'
 import {
-  CoWorkingSpaceCreateDto,
-  CoWorkingSpaceUpdateDto,
-} from './coWorkingSpace.dto'
+  CoworkingSpaceCreateDto,
+  CoworkingSpaceUpdateDto,
+} from './coworkingSpace.dto'
 
-@Controller('/v1/coWorkingSpaces')
-export class CoWorkingSpaceController {
+@Controller('/v1/coworkingSpaces')
+export class CoworkingSpaceController {
   constructor(
     private eventService: EventService,
-    private coWorkingSpaceDomainFacade: CoWorkingSpaceDomainFacade,
+    private coworkingSpaceDomainFacade: CoworkingSpaceDomainFacade,
     private authenticationDomainFacade: AuthenticationDomainFacade,
   ) {}
 
@@ -35,23 +35,19 @@ export class CoWorkingSpaceController {
   async findMany(@Req() request: Request) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
-    const items = await this.coWorkingSpaceDomainFacade.findMany(queryOptions)
+    const items = await this.coworkingSpaceDomainFacade.findMany(queryOptions)
 
     return items
   }
 
   @Post('/')
-  async create(
-    @Body() body: CoWorkingSpaceCreateDto,
-    @Req() request: Request,
-  ) {
+  async create(@Body() body: CoworkingSpaceCreateDto, @Req() request: Request) {
     const { user } = this.authenticationDomainFacade.getRequestPayload(request)
 
-    const item = await this.coWorkingSpaceDomainFacade.create(body)
+    const item = await this.coworkingSpaceDomainFacade.create(body)
 
-    await this.eventService.emit<CoWorkingSpaceApplicationEvent.CoWorkingSpaceCreated.Payload>(
-      CoWorkingSpaceApplicationEvent
-        .CoWorkingSpaceCreated.key,
+    await this.eventService.emit<CoworkingSpaceApplicationEvent.CoworkingSpaceCreated.Payload>(
+      CoworkingSpaceApplicationEvent.CoworkingSpaceCreated.key,
       {
         id: item.id,
         userId: user.id,
@@ -61,47 +57,42 @@ export class CoWorkingSpaceController {
     return item
   }
 
-  @Get('/:coWorkingSpaceId')
+  @Get('/:coworkingSpaceId')
   async findOne(
-    @Param('coWorkingSpaceId') coWorkingSpaceId: string,
+    @Param('coworkingSpaceId') coworkingSpaceId: string,
     @Req() request: Request,
   ) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
-    const item =
-      await this.coWorkingSpaceDomainFacade.findOneByIdOrFail(
-        coWorkingSpaceId,
-        queryOptions,
-      )
+    const item = await this.coworkingSpaceDomainFacade.findOneByIdOrFail(
+      coworkingSpaceId,
+      queryOptions,
+    )
 
     return item
   }
 
-  @Patch('/:coWorkingSpaceId')
+  @Patch('/:coworkingSpaceId')
   async update(
-    @Param('coWorkingSpaceId') coWorkingSpaceId: string,
-    @Body() body: CoWorkingSpaceUpdateDto,
+    @Param('coworkingSpaceId') coworkingSpaceId: string,
+    @Body() body: CoworkingSpaceUpdateDto,
   ) {
     const item =
-      await this.coWorkingSpaceDomainFacade.findOneByIdOrFail(
-        coWorkingSpaceId,
-      )
+      await this.coworkingSpaceDomainFacade.findOneByIdOrFail(coworkingSpaceId)
 
-    const itemUpdated = await this.coWorkingSpaceDomainFacade.update(
+    const itemUpdated = await this.coworkingSpaceDomainFacade.update(
       item,
-      body as Partial<CoWorkingSpace>,
+      body as Partial<CoworkingSpace>,
     )
     return itemUpdated
   }
 
-  @Delete('/:coWorkingSpaceId')
-  async delete(@Param('coWorkingSpaceId') coWorkingSpaceId: string) {
+  @Delete('/:coworkingSpaceId')
+  async delete(@Param('coworkingSpaceId') coworkingSpaceId: string) {
     const item =
-      await this.coWorkingSpaceDomainFacade.findOneByIdOrFail(
-        coWorkingSpaceId,
-      )
+      await this.coworkingSpaceDomainFacade.findOneByIdOrFail(coworkingSpaceId)
 
-    await this.coWorkingSpaceDomainFacade.delete(item)
+    await this.coworkingSpaceDomainFacade.delete(item)
 
     return item
   }

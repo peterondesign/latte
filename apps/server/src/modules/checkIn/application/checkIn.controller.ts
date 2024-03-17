@@ -11,17 +11,11 @@ import {
   Req,
 } from '@nestjs/common'
 import { EventService } from '@server/libraries/event'
-import {
-  CheckIn,
-  CheckInDomainFacade,
-} from '@server/modules/checkIn/domain'
+import { CheckIn, CheckInDomainFacade } from '@server/modules/checkIn/domain'
 import { AuthenticationDomainFacade } from '@server/modules/authentication/domain'
 import { RequestHelper } from '../../../helpers/request'
 import { CheckInApplicationEvent } from './checkIn.application.event'
-import {
-  CheckInCreateDto,
-  CheckInUpdateDto,
-} from './checkIn.dto'
+import { CheckInCreateDto, CheckInUpdateDto } from './checkIn.dto'
 
 @Controller('/v1/checkIns')
 export class CheckInController {
@@ -41,17 +35,13 @@ export class CheckInController {
   }
 
   @Post('/')
-  async create(
-    @Body() body: CheckInCreateDto,
-    @Req() request: Request,
-  ) {
+  async create(@Body() body: CheckInCreateDto, @Req() request: Request) {
     const { user } = this.authenticationDomainFacade.getRequestPayload(request)
 
     const item = await this.checkInDomainFacade.create(body)
 
     await this.eventService.emit<CheckInApplicationEvent.CheckInCreated.Payload>(
-      CheckInApplicationEvent
-        .CheckInCreated.key,
+      CheckInApplicationEvent.CheckInCreated.key,
       {
         id: item.id,
         userId: user.id,
@@ -68,11 +58,10 @@ export class CheckInController {
   ) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
-    const item =
-      await this.checkInDomainFacade.findOneByIdOrFail(
-        checkInId,
-        queryOptions,
-      )
+    const item = await this.checkInDomainFacade.findOneByIdOrFail(
+      checkInId,
+      queryOptions,
+    )
 
     return item
   }
@@ -82,10 +71,7 @@ export class CheckInController {
     @Param('checkInId') checkInId: string,
     @Body() body: CheckInUpdateDto,
   ) {
-    const item =
-      await this.checkInDomainFacade.findOneByIdOrFail(
-        checkInId,
-      )
+    const item = await this.checkInDomainFacade.findOneByIdOrFail(checkInId)
 
     const itemUpdated = await this.checkInDomainFacade.update(
       item,
@@ -96,10 +82,7 @@ export class CheckInController {
 
   @Delete('/:checkInId')
   async delete(@Param('checkInId') checkInId: string) {
-    const item =
-      await this.checkInDomainFacade.findOneByIdOrFail(
-        checkInId,
-      )
+    const item = await this.checkInDomainFacade.findOneByIdOrFail(checkInId)
 
     await this.checkInDomainFacade.delete(item)
 

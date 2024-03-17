@@ -7,27 +7,25 @@ import { UserDomainModule } from '../../../modules/user/domain'
 
 import { CheckInByUserController } from './checkInByUser.controller'
 
-import { CoWorkingSpaceDomainModule } from '../../../modules/coWorkingSpace/domain'
+import { CoworkingSpaceDomainModule } from '../../../modules/coworkingSpace/domain'
 
-import { CheckInByCoWorkingSpaceController } from './checkInByCoWorkingSpace.controller'
+import { CheckInByCoworkingSpaceController } from './checkInByCoworkingSpace.controller'
 
 @Module({
   imports: [
     AuthenticationDomainModule,
     CheckInDomainModule,
 
-UserDomainModule,
+    UserDomainModule,
 
-CoWorkingSpaceDomainModule,
-
-],
+    CoworkingSpaceDomainModule,
+  ],
   controllers: [
     CheckInController,
-    
+
     CheckInByUserController,
-    
-    CheckInByCoWorkingSpaceController,
-    
+
+    CheckInByCoworkingSpaceController,
   ],
   providers: [],
 })

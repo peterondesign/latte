@@ -12,13 +12,19 @@ import {
 
 import { Notification } from '../../../modules/notification/domain'
 
-import { CoWorkingSpace } from '../../../modules/coWorkingSpace/domain'
-
 import { Review } from '../../../modules/review/domain'
+
+import { NomadMatch } from '../../../modules/nomadMatch/domain'
+
+import { Message } from '../../../modules/message/domain'
+
+import { Subscription } from '../../../modules/subscription/domain'
 
 import { CheckIn } from '../../../modules/checkIn/domain'
 
-import { Comment } from '../../../modules/comment/domain'
+import { Reward } from '../../../modules/reward/domain'
+
+import { Preference } from '../../../modules/preference/domain'
 
 export enum UserStatus {
   VERIFIED = 'VERIFIED',
@@ -45,42 +51,34 @@ export class User {
   @Column({ enum: UserStatus, default: UserStatus.VERIFIED })
   status: UserStatus
 
-@OneToMany(
-  () => CoWorkingSpace,
-  child => child.admin,
-  )
+  @OneToMany(() => Review, child => child.user)
+  reviews?: Review[]
 
-coWorkingSpacesAsAdmin?: CoWorkingSpace[]
+  @OneToMany(() => NomadMatch, child => child.userA)
+  nomadMatchsAsUserA?: NomadMatch[]
 
-@OneToMany(
-  () => Review,
-  child => child.user,
-  )
+  @OneToMany(() => NomadMatch, child => child.userB)
+  nomadMatchsAsUserB?: NomadMatch[]
 
-reviews?: Review[]
+  @OneToMany(() => Message, child => child.sender)
+  messagesAsSender?: Message[]
 
-@OneToMany(
-  () => CheckIn,
-  child => child.user,
-  )
+  @OneToMany(() => Message, child => child.receiver)
+  messagesAsReceiver?: Message[]
 
-checkIns?: CheckIn[]
+  @OneToMany(() => Subscription, child => child.user)
+  subscriptions?: Subscription[]
 
-@OneToMany(
-  () => Comment,
-  child => child.user,
-  )
+  @OneToMany(() => CheckIn, child => child.user)
+  checkIns?: CheckIn[]
 
-comments?: Comment[]
+  @OneToMany(() => Reward, child => child.user)
+  rewards?: Reward[]
 
-@OneToMany(
-  () => Comment,
-  child => child.profileUser,
-  )
+  @OneToMany(() => Preference, child => child.user)
+  preferences?: Preference[]
 
-commentsAsProfileUser?: Comment[]
-
-@OneToMany(() => Notification, notification => notification.user)
+  @OneToMany(() => Notification, notification => notification.user)
   notifications?: Notification[]
 
   @CreateDateColumn()

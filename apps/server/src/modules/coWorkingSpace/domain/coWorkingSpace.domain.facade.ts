@@ -3,40 +3,38 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { DatabaseHelper } from '../../../core/database'
 import { RequestHelper } from '../../../helpers/request'
-import { CoWorkingSpace } from './coWorkingSpace.model'
+import { CoworkingSpace } from './coworkingSpace.model'
 
-import { User } from '../../user/domain'
+import { City } from '../../city/domain'
 
 @Injectable()
-export class CoWorkingSpaceDomainFacade {
+export class CoworkingSpaceDomainFacade {
   constructor(
-    @InjectRepository(CoWorkingSpace)
-    private repository: Repository<CoWorkingSpace>,
+    @InjectRepository(CoworkingSpace)
+    private repository: Repository<CoworkingSpace>,
     private databaseHelper: DatabaseHelper,
   ) {}
 
-  async create(
-    values: Partial<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace> {
+  async create(values: Partial<CoworkingSpace>): Promise<CoworkingSpace> {
     return this.repository.save(values)
   }
 
   async update(
-    item: CoWorkingSpace,
-    values: Partial<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace> {
+    item: CoworkingSpace,
+    values: Partial<CoworkingSpace>,
+  ): Promise<CoworkingSpace> {
     const itemUpdated = { ...item, ...values }
 
     return this.repository.save(itemUpdated)
   }
 
-  async delete(item: CoWorkingSpace): Promise<void> {
+  async delete(item: CoworkingSpace): Promise<void> {
     await this.repository.softDelete(item.id)
   }
 
   async findMany(
-    queryOptions: RequestHelper.QueryOptions<CoWorkingSpace> = {},
-  ): Promise<CoWorkingSpace[]> {
+    queryOptions: RequestHelper.QueryOptions<CoworkingSpace> = {},
+  ): Promise<CoworkingSpace[]> {
     const query = this.databaseHelper.applyQueryOptions(
       this.repository,
       queryOptions,
@@ -47,8 +45,8 @@ export class CoWorkingSpaceDomainFacade {
 
   async findOneByIdOrFail(
     id: string,
-    queryOptions: RequestHelper.QueryOptions<CoWorkingSpace> = {},
-  ): Promise<CoWorkingSpace> {
+    queryOptions: RequestHelper.QueryOptions<CoworkingSpace> = {},
+  ): Promise<CoworkingSpace> {
     if (!id) {
       this.databaseHelper.invalidQueryWhere('id')
     }
@@ -74,12 +72,12 @@ export class CoWorkingSpaceDomainFacade {
     return item
   }
 
-async findManyByAdmin(
-    item: User,
-    queryOptions: RequestHelper.QueryOptions<CoWorkingSpace> = {},
-  ): Promise<CoWorkingSpace[]> {
+  async findManyByCity(
+    item: City,
+    queryOptions: RequestHelper.QueryOptions<CoworkingSpace> = {},
+  ): Promise<CoworkingSpace[]> {
     if (!item) {
-      this.databaseHelper.invalidQueryWhere('admin')
+      this.databaseHelper.invalidQueryWhere('city')
     }
 
     const queryOptionsEnsured = {
@@ -87,7 +85,7 @@ async findManyByAdmin(
       orders: queryOptions.orders,
       filters: {
         ...queryOptions.filters,
-        adminId: item.id,
+        cityId: item.id,
       },
     }
 
@@ -98,5 +96,4 @@ async findManyByAdmin(
 
     return query.getMany()
   }
-
 }

@@ -1,66 +1,63 @@
 import { HttpService } from '../../core/http'
 import { ApiHelper } from '../helpers/api.helper'
-import { CoWorkingSpace } from './coWorkingSpace.model'
+import { CoworkingSpace } from './coworkingSpace.model'
 
-export class CoWorkingSpaceApi {
+export class CoworkingSpaceApi {
   static findMany(
-    queryOptions?: ApiHelper.QueryOptions<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace[]> {
+    queryOptions?: ApiHelper.QueryOptions<CoworkingSpace>,
+  ): Promise<CoworkingSpace[]> {
     const buildOptions = ApiHelper.buildQueryOptions(queryOptions)
 
-    return HttpService.api.get(`/v1/coWorkingSpaces${buildOptions}`)
+    return HttpService.api.get(`/v1/coworkingSpaces${buildOptions}`)
   }
 
   static findOne(
-    coWorkingSpaceId: string,
-    queryOptions?: ApiHelper.QueryOptions<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace> {
+    coworkingSpaceId: string,
+    queryOptions?: ApiHelper.QueryOptions<CoworkingSpace>,
+  ): Promise<CoworkingSpace> {
     const buildOptions = ApiHelper.buildQueryOptions(queryOptions)
 
     return HttpService.api.get(
-      `/v1/coWorkingSpaces/${coWorkingSpaceId}${buildOptions}`,
+      `/v1/coworkingSpaces/${coworkingSpaceId}${buildOptions}`,
     )
   }
 
-  static createOne(
-    values: Partial<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace> {
-    return HttpService.api.post(`/v1/coWorkingSpaces`, values)
+  static createOne(values: Partial<CoworkingSpace>): Promise<CoworkingSpace> {
+    return HttpService.api.post(`/v1/coworkingSpaces`, values)
   }
 
   static updateOne(
-    coWorkingSpaceId: string,
-    values: Partial<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace> {
+    coworkingSpaceId: string,
+    values: Partial<CoworkingSpace>,
+  ): Promise<CoworkingSpace> {
     return HttpService.api.patch(
-      `/v1/coWorkingSpaces/${coWorkingSpaceId}`,
+      `/v1/coworkingSpaces/${coworkingSpaceId}`,
       values,
     )
   }
 
-  static deleteOne(coWorkingSpaceId: string): Promise<void> {
-    return HttpService.api.delete(`/v1/coWorkingSpaces/${coWorkingSpaceId}`)
+  static deleteOne(coworkingSpaceId: string): Promise<void> {
+    return HttpService.api.delete(`/v1/coworkingSpaces/${coworkingSpaceId}`)
   }
 
-static findManyByAdminId(
-    adminId: string,
-    queryOptions?: ApiHelper.QueryOptions<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace[]> {
+  static findManyByCityId(
+    cityId: string,
+    queryOptions?: ApiHelper.QueryOptions<CoworkingSpace>,
+  ): Promise<CoworkingSpace[]> {
     const buildOptions = ApiHelper.buildQueryOptions(queryOptions)
 
     return HttpService.api.get(
-      `/v1/users/admin/${adminId}/coWorkingSpaces${buildOptions}`,
+      `/v1/citys/city/${cityId}/coworkingSpaces${buildOptions}`,
     )
   }
 
-  static createOneByAdminId(
-    adminId: string,
-    values: Partial<CoWorkingSpace>,
-  ): Promise<CoWorkingSpace> {
+  static createOneByCityId(
+    cityId: string,
+    values: Partial<CoworkingSpace>,
+  ): Promise<CoworkingSpace> {
     return HttpService.api.post(
-      `/v1/users/admin/${adminId}/coWorkingSpaces`,
+      `/v1/citys/city/${cityId}/coworkingSpaces`,
       values,
     )
   }
-
 }

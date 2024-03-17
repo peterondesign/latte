@@ -1,18 +1,12 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { DatabaseHelperModule } from '../../../core/database'
-import { CoWorkingSpaceDomainFacade } from './coWorkingSpace.domain.facade'
-import { CoWorkingSpace } from './coWorkingSpace.model'
+import { CoworkingSpaceDomainFacade } from './coworkingSpace.domain.facade'
+import { CoworkingSpace } from './coworkingSpace.model'
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([CoWorkingSpace]),
-    DatabaseHelperModule,
-  ],
-  providers: [
-    CoWorkingSpaceDomainFacade,
-    CoWorkingSpaceDomainFacade,
-  ],
-  exports: [CoWorkingSpaceDomainFacade],
+  imports: [TypeOrmModule.forFeature([CoworkingSpace]), DatabaseHelperModule],
+  providers: [CoworkingSpaceDomainFacade, CoworkingSpaceDomainFacade],
+  exports: [CoworkingSpaceDomainFacade],
 })
-export class CoWorkingSpaceDomainModule {}
+export class CoworkingSpaceDomainModule {}

@@ -13,44 +13,34 @@ import {
 
 import { User } from '../../../modules/user/domain'
 
-import { CoWorkingSpace } from '../../../modules/coWorkingSpace/domain'
+import { CoworkingSpace } from '../../../modules/coworkingSpace/domain'
 
 @Entity()
 export class Review {
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-@PrimaryGeneratedColumn('uuid')
+  @Column({ nullable: true })
+  content?: string
 
-id: string
+  @ColumnNumeric({ nullable: true, type: 'numeric' })
+  rating?: number
 
-@Column({})
+  @Column({ nullable: true })
+  userId?: string
 
-content: string
-
-@Column({})
-
-userId: string
-
-@ManyToOne(
-  () => User,
-  parent => parent.reviews,
-  )
+  @ManyToOne(() => User, parent => parent.reviews)
   @JoinColumn({ name: 'userId' })
+  user?: User
 
-user?: User
+  @Column({ nullable: true })
+  coworkingSpaceId?: string
 
-@Column({})
+  @ManyToOne(() => CoworkingSpace, parent => parent.reviews)
+  @JoinColumn({ name: 'coworkingSpaceId' })
+  coworkingSpace?: CoworkingSpace
 
-coWorkingSpaceId: string
-
-@ManyToOne(
-  () => CoWorkingSpace,
-  parent => parent.reviews,
-  )
-  @JoinColumn({ name: 'coWorkingSpaceId' })
-
-coWorkingSpace?: CoWorkingSpace
-
-@CreateDateColumn()
+  @CreateDateColumn()
   dateCreated: string
 
   @UpdateDateColumn()

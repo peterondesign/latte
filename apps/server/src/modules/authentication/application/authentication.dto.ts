@@ -27,7 +27,7 @@ export class AuthenticationRegisterDto {
   @IsNotEmpty()
   name: string
 
-@IsString()
+  @IsString()
   @IsNotEmpty()
   @MinLength(8)
   @MaxLength(32)

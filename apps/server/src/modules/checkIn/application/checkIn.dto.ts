@@ -7,69 +7,45 @@ import {
 } from 'class-validator'
 
 export class CheckInCreateDto {
-
-@IsString()
-
-@IsNotEmpty()
-  checkInTime: string
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   userId?: string
 
-@IsString()
+  @IsString()
+  @IsOptional()
+  coworkingSpaceId?: string
 
-@IsOptional()
-  coWorkingSpaceId?: string
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateCreated?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateDeleted?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateUpdated?: string
-
 }
 
 export class CheckInUpdateDto {
-
-@IsString()
-
-@IsOptional()
-  checkInTime?: string
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   userId?: string
 
-@IsString()
+  @IsString()
+  @IsOptional()
+  coworkingSpaceId?: string
 
-@IsOptional()
-  coWorkingSpaceId?: string
-
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateCreated?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateDeleted?: string
 
-@IsString()
-
-@IsOptional()
+  @IsString()
+  @IsOptional()
   dateUpdated?: string
-
 }

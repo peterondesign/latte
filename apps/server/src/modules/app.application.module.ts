@@ -3,15 +3,23 @@ import { AuthenticationApplicationModule } from './authentication/application'
 import { AuthorizationApplicationModule } from './authorization/application'
 import { UserApplicationModule } from './user/application'
 
-import { CoWorkingSpaceApplicationModule } from './coWorkingSpace/application'
+import { CityApplicationModule } from './city/application'
 
-import { ImageApplicationModule } from './image/application'
+import { CoworkingSpaceApplicationModule } from './coworkingSpace/application'
 
 import { ReviewApplicationModule } from './review/application'
 
+import { NomadMatchApplicationModule } from './nomadMatch/application'
+
+import { MessageApplicationModule } from './message/application'
+
+import { SubscriptionApplicationModule } from './subscription/application'
+
 import { CheckInApplicationModule } from './checkIn/application'
 
-import { CommentApplicationModule } from './comment/application'
+import { RewardApplicationModule } from './reward/application'
+
+import { PreferenceApplicationModule } from './preference/application'
 
 import { AiApplicationModule } from './ai/application/ai.application.module'
 import { NotificationApplicationModule } from './notification/application/notification.application.module'
@@ -26,17 +34,24 @@ import { UploadApplicationModule } from './upload/application/upload.application
     AiApplicationModule,
     UploadApplicationModule,
 
-CoWorkingSpaceApplicationModule,
+    CityApplicationModule,
 
-ImageApplicationModule,
+    CoworkingSpaceApplicationModule,
 
-ReviewApplicationModule,
+    ReviewApplicationModule,
 
-CheckInApplicationModule,
+    NomadMatchApplicationModule,
 
-CommentApplicationModule,
+    MessageApplicationModule,
 
-],
+    SubscriptionApplicationModule,
+
+    CheckInApplicationModule,
+
+    RewardApplicationModule,
+
+    PreferenceApplicationModule,
+  ],
   controllers: [],
   providers: [],
 })

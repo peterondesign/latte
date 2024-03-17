@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   database:
-    container_name: FMnDfZ-coworklive-postgresql
+    container_name: d0sTXr-coworklivev3-postgresql
     image: postgres
     restart: always
     environment:
@@ -11,7 +11,7 @@ services:
     ports:
       - '5442:5432'
   pgadmin:
-    container_name: FMnDfZ-coworklive-pgadmin4
+    container_name: d0sTXr-coworklivev3-pgadmin4
     image: dpage/pgadmin4
     restart: always
     environment:
@@ -20,7 +20,7 @@ services:
     ports:
       - '5052:80'
   mail:
-    container_name: FMnDfZ-coworklive-mail
+    container_name: d0sTXr-coworklivev3-mail
     image: axllent/mailpit
     restart: always
     volumes:

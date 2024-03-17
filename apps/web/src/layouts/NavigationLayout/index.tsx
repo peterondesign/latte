@@ -31,116 +31,91 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
   }
 
   const itemsLeftbar = [
-
-{
-      key: '/co-working-spaces',
-      label: 'Discover',
-      onClick: () => goTo('/co-working-spaces'),
+    {
+      key: '/select-city',
+      label: 'Choose Your City',
+      onClick: () => goTo('/select-city'),
     },
 
-{
-      key: '/admin-dashboard',
-      label: 'Admin Dashboard',
-      onClick: () => goTo('/admin-dashboard'),
+    {
+      key: '/matches',
+      label: 'Your Matches',
+      onClick: () => goTo('/matches'),
     },
 
-{
-      key: '/edit-profile',
-      label: 'Edit Profile',
-      onClick: () => goTo('/edit-profile'),
+    {
+      key: '/subscription',
+      label: 'Subscription Benefits',
+      onClick: () => goTo('/subscription'),
     },
 
-{
-      key: '/nomads',
-      label: 'Nomad Community',
-      onClick: () => goTo('/nomads'),
+    {
+      key: '/suggest-cities',
+      label: 'Suggested Cities',
+      onClick: () => goTo('/suggest-cities'),
     },
 
-{
-      key: '/manage-co-working-spaces',
-      label: 'Manage Spaces',
-      onClick: () => goTo('/manage-co-working-spaces'),
+    {
+      key: '/nearby-spaces',
+      label: 'Spaces Near You',
+      onClick: () => goTo('/nearby-spaces'),
     },
-
-{
-      key: '/add-co-working-space',
-      label: 'Add New Space',
-      onClick: () => goTo('/add-co-working-space'),
-    },
-
-{
-      key: '/',
-      label: 'Home',
-      onClick: () => goTo('/'),
-    },
-
-]
-
-  const itemsUser = [
-
-]
-
-  const itemsTopbar = [
-    
   ]
 
+  const itemsUser = []
+
+  const itemsTopbar = []
+
   const itemsSubNavigation = [
-    
     {
-      key: '/co-working-spaces',
-      label: 'Discover',
+      key: '/select-city',
+      label: 'Choose Your City',
     },
-    
+
     {
-      key: '/co-working-space/:id',
+      key: '/search/:city',
+      label: 'Find Coworking Spaces',
+    },
+
+    {
+      key: '/space/:id',
       label: 'Space Details',
     },
-    
+
     {
-      key: '/nomad-profile/:id',
-      label: 'Nomad Profile',
+      key: '/featured-coworkers/:city',
+      label: 'Featured Nomads',
     },
-    
+
     {
-      key: '/admin-dashboard',
-      label: 'Admin Dashboard',
+      key: '/nomads/:city',
+      label: 'Nomads Near You',
     },
-    
+
     {
-      key: '/edit-profile',
-      label: 'Edit Profile',
+      key: '/matches',
+      label: 'Your Matches',
     },
-    
+
     {
-      key: '/nomads',
-      label: 'Nomad Community',
+      key: '/subscription',
+      label: 'Subscription Benefits',
     },
-    
+
     {
-      key: '/manage-co-working-spaces',
-      label: 'Manage Spaces',
+      key: '/suggest-cities',
+      label: 'Suggested Cities',
     },
-    
+
     {
-      key: '/add-co-working-space',
-      label: 'Add New Space',
+      key: '/suggest-spaces/:city',
+      label: 'Recommended Spaces',
     },
-    
+
     {
-      key: '/edit-co-working-space/:id',
-      label: 'Manage Spaces',
+      key: '/nearby-spaces',
+      label: 'Spaces Near You',
     },
-    
-    {
-      key: '/reviews/:spaceId',
-      label: 'Space Reviews',
-    },
-    
-    {
-      key: '/',
-      label: 'Home',
-    },
-    
   ]
 
   const itemsMobile = [

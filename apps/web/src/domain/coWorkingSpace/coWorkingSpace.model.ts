@@ -1,45 +1,41 @@
+import { City } from '../city'
 
+import { Review } from '../review'
 
-import { User } from "../user"
+import { CheckIn } from '../checkIn'
 
-import { Image } from "../image"
+export class CoworkingSpace {
+  id: string
 
-import { Review } from "../review"
+  name?: string
 
-import { CheckIn } from "../checkIn"
+  address?: string
 
-export class CoWorkingSpace {
+  priceRange?: string
 
-id: string
+  amenities?: string
 
-title: string
+  photosUrl?: string
 
-address: string
+  hoursOfOperation?: string
 
-description?: string
+  googleRating?: number
 
-amenities?: string
+  averageNoiseLevel?: string
 
-noiseLevel?: string
+  averageWifiStrength?: string
 
-occupancy?: number
+  cityId?: string
 
-popular?: boolean
+  city?: City
 
-adminId: string
+  dateCreated: string
 
-admin?: User
+  dateDeleted: string
 
-dateCreated: string
+  dateUpdated: string
 
-dateDeleted: string
+  reviews?: Review[]
 
-dateUpdated: string
-
-images?: Image[]
-
-reviews?: Review[]
-
-checkIns?: CheckIn[]
-
+  checkIns?: CheckIn[]
 }

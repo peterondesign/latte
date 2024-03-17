@@ -13,31 +13,26 @@ import { UserDomainFacade } from '../../user/domain'
 @Controller('/v1/users')
 export class ReviewByUserController {
   constructor(
-    
     private userDomainFacade: UserDomainFacade,
-    
+
     private reviewDomainFacade: ReviewDomainFacade,
     private eventService: EventService,
     private authenticationDomainFacade: AuthenticationDomainFacade,
   ) {}
 
-@Get('/user/:userId/reviews')
+  @Get('/user/:userId/reviews')
   async findManyUserId(
     @Param('userId') userId: string,
     @Req() request: Request,
   ) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
-    const parent =
-      await this.userDomainFacade.findOneByIdOrFail(
-        userId,
-      )
+    const parent = await this.userDomainFacade.findOneByIdOrFail(userId)
 
-    const items =
-      await this.reviewDomainFacade.findManyByUser(
-        parent,
-        queryOptions,
-      )
+    const items = await this.reviewDomainFacade.findManyByUser(
+      parent,
+      queryOptions,
+    )
 
     return items
   }
@@ -55,8 +50,7 @@ export class ReviewByUserController {
     const item = await this.reviewDomainFacade.create(valuesUpdated)
 
     await this.eventService.emit<ReviewApplicationEvent.ReviewCreated.Payload>(
-      ReviewApplicationEvent
-        .ReviewCreated.key,
+      ReviewApplicationEvent.ReviewCreated.key,
       {
         id: item.id,
         userId: user.id,
@@ -65,5 +59,4 @@ export class ReviewByUserController {
 
     return item
   }
-  
 }

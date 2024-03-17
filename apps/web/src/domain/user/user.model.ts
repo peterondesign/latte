@@ -1,14 +1,18 @@
+import { Notification } from '../notification'
 
+import { Review } from '../review'
 
-import { Notification } from "../notification"
+import { NomadMatch } from '../nomadMatch'
 
-import { CoWorkingSpace } from "../coWorkingSpace"
+import { Message } from '../message'
 
-import { Review } from "../review"
+import { Subscription } from '../subscription'
 
-import { CheckIn } from "../checkIn"
+import { CheckIn } from '../checkIn'
 
-import { Comment } from "../comment"
+import { Reward } from '../reward'
+
+import { Preference } from '../preference'
 
 export enum UserStatus {
   CREATED = 'CREATED',
@@ -25,14 +29,21 @@ export class User {
   dateUpdated: string
   notifications?: Notification[]
 
-coWorkingSpacesAsAdmin?: CoWorkingSpace[]
+  reviews?: Review[]
 
-reviews?: Review[]
+  nomadMatchsAsUserA?: NomadMatch[]
 
-checkIns?: CheckIn[]
+  nomadMatchsAsUserB?: NomadMatch[]
 
-comments?: Comment[]
+  messagesAsSender?: Message[]
 
-commentsAsProfileUser?: Comment[]
+  messagesAsReceiver?: Message[]
 
+  subscriptions?: Subscription[]
+
+  checkIns?: CheckIn[]
+
+  rewards?: Reward[]
+
+  preferences?: Preference[]
 }

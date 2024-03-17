@@ -6,6 +6,5 @@ export namespace RouterObject {
     REGISTER = `/register`,
     RESET_PASSWORD = `/reset-password`,
     NOTIFICATIONS = `/notifications`,
-
   }
 }

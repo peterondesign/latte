@@ -11,83 +11,58 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
-import { User } from '../../../modules/user/domain'
-
-import { Image } from '../../../modules/image/domain'
+import { City } from '../../../modules/city/domain'
 
 import { Review } from '../../../modules/review/domain'
 
 import { CheckIn } from '../../../modules/checkIn/domain'
 
 @Entity()
-export class CoWorkingSpace {
+export class CoworkingSpace {
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-@PrimaryGeneratedColumn('uuid')
+  @Column({ nullable: true })
+  name?: string
 
-id: string
+  @Column({ nullable: true })
+  address?: string
 
-@Column({})
+  @Column({ nullable: true })
+  priceRange?: string
 
-title: string
+  @Column({ nullable: true })
+  amenities?: string
 
-@Column({})
+  @Column({ nullable: true })
+  photosUrl?: string
 
-address: string
+  @Column({ nullable: true })
+  hoursOfOperation?: string
 
-@Column({"nullable":true})
+  @ColumnNumeric({ nullable: true, type: 'numeric' })
+  googleRating?: number
 
-description?: string
+  @Column({ nullable: true })
+  averageNoiseLevel?: string
 
-@Column({"nullable":true})
+  @Column({ nullable: true })
+  averageWifiStrength?: string
 
-amenities?: string
+  @Column({ nullable: true })
+  cityId?: string
 
-@Column({"nullable":true})
+  @ManyToOne(() => City, parent => parent.coworkingSpaces)
+  @JoinColumn({ name: 'cityId' })
+  city?: City
 
-noiseLevel?: string
+  @OneToMany(() => Review, child => child.coworkingSpace)
+  reviews?: Review[]
 
-@ColumnNumeric({"nullable":true,"type":"numeric"})
+  @OneToMany(() => CheckIn, child => child.coworkingSpace)
+  checkIns?: CheckIn[]
 
-occupancy?: number
-
-@Column({"nullable":true})
-
-popular?: boolean
-
-@Column({})
-
-adminId: string
-
-@ManyToOne(
-  () => User,
-  parent => parent.coWorkingSpacesAsAdmin,
-  )
-  @JoinColumn({ name: 'adminId' })
-
-admin?: User
-
-@OneToMany(
-  () => Image,
-  child => child.coWorkingSpace,
-  )
-
-images?: Image[]
-
-@OneToMany(
-  () => Review,
-  child => child.coWorkingSpace,
-  )
-
-reviews?: Review[]
-
-@OneToMany(
-  () => CheckIn,
-  child => child.coWorkingSpace,
-  )
-
-checkIns?: CheckIn[]
-
-@CreateDateColumn()
+  @CreateDateColumn()
   dateCreated: string
 
   @UpdateDateColumn()

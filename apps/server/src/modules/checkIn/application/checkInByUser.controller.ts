@@ -13,31 +13,26 @@ import { UserDomainFacade } from '../../user/domain'
 @Controller('/v1/users')
 export class CheckInByUserController {
   constructor(
-    
     private userDomainFacade: UserDomainFacade,
-    
+
     private checkInDomainFacade: CheckInDomainFacade,
     private eventService: EventService,
     private authenticationDomainFacade: AuthenticationDomainFacade,
   ) {}
 
-@Get('/user/:userId/checkIns')
+  @Get('/user/:userId/checkIns')
   async findManyUserId(
     @Param('userId') userId: string,
     @Req() request: Request,
   ) {
     const queryOptions = RequestHelper.getQueryOptions(request)
 
-    const parent =
-      await this.userDomainFacade.findOneByIdOrFail(
-        userId,
-      )
+    const parent = await this.userDomainFacade.findOneByIdOrFail(userId)
 
-    const items =
-      await this.checkInDomainFacade.findManyByUser(
-        parent,
-        queryOptions,
-      )
+    const items = await this.checkInDomainFacade.findManyByUser(
+      parent,
+      queryOptions,
+    )
 
     return items
   }
@@ -55,8 +50,7 @@ export class CheckInByUserController {
     const item = await this.checkInDomainFacade.create(valuesUpdated)
 
     await this.eventService.emit<CheckInApplicationEvent.CheckInCreated.Payload>(
-      CheckInApplicationEvent
-        .CheckInCreated.key,
+      CheckInApplicationEvent.CheckInCreated.key,
       {
         id: item.id,
         userId: user.id,
@@ -65,5 +59,4 @@ export class CheckInByUserController {
 
     return item
   }
-  
 }
