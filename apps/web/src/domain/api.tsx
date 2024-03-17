@@ -9,7 +9,7 @@ import { NotificationApi } from './notification/notification.api'
 
 import { CityApi } from './city/city.api'
 
-import { CoworkingSpaceApi } from './coworkingSpace/coworkingSpace.api'
+import { CoworkingSpaceApi } from './coWorkingSpace/coWorkingSpace.api'
 
 import { ReviewApi } from './review/review.api'
 
